@@ -14,6 +14,7 @@ File generate_license_plate
 import cv2
 import os
 import sys
+import argparse
 import datetime
 from generate_license_plate_number import LicensePlateNoGenerator
 from generate_chars_image import CharsImageGenerator
@@ -68,13 +69,20 @@ class LicensePlateGenerator(object):
     
     
 if __name__ == '__main__':
+    parser = argparse.ArgumentParser()
+    parser.add_argument('--model_path', type=str, default='saved_model/best.pth', help='model.pt path(s)')  
+    parser.add_argument('--image_path', type=str, default='images/test.jpg', help='source')
+    opt = parser.parse_args()
+    print(opt)
+    return
+
     plate_height = 72
     # 每个颜色的生成
     blue_batch_size = 1400
     yellow_batch_size = 300
     new_energy_batch_size = 300
     # 迭代次数
-    iter_times = 10000
+    iter_times = 1
     # 保存文件夹名称
     file_path = os.path.join(os.getcwd(), 'plate_images')
     start_index = 0
